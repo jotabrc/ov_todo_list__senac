@@ -1,4 +1,4 @@
-package io.github.jotabrc.ov_todo.service.task;
+package io.github.jotabrc.ov_todo.service.task.strategy;
 
 import io.github.jotabrc.ov_todo.domain.task.dto.TaskDto;
 import io.github.jotabrc.ov_todo.mapper.TaskMapper;

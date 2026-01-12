@@ -1,6 +1,7 @@
-package io.github.jotabrc.ov_todo.service.task;
+package io.github.jotabrc.ov_todo.service.task.strategy;
 
 import io.github.jotabrc.ov_todo.domain.task.dto.TaskDto;
+import io.github.jotabrc.ov_todo.domain.task.entity.Task;
 import io.github.jotabrc.ov_todo.mapper.TaskMapper;
 import io.github.jotabrc.ov_todo.repository.TaskRepositoryInterface;
 import io.github.jotabrc.ov_todo.service.BaseStrategy;
@@ -19,7 +20,19 @@ public class UpdateStrategy implements BaseStrategy<TaskDto, TaskDto> {
 
     @Override
     public TaskDto execute(TaskDto taskDto) {
-        return taskMapper.toTaskDto(taskRepository.findByIdOrElseThrow(taskDto.getId()));
+        Task task = taskRepository.findByIdOrElseThrow(taskDto.getId());
+        updateTask(taskDto, task);
+        return taskMapper.toTaskDto(taskRepository.save(task));
+    }
+
+    private void updateTask(TaskDto taskDto, Task task) {
+        task.setName(taskDto.getName());
+        task.setStatus(taskDto.getStatus());
+        task.getCategories()
+                .addAll(taskDto.getCategories()
+                        .stream()
+                        .map(taskMapper::toCategory)
+                        .toList());
     }
 
     @Override

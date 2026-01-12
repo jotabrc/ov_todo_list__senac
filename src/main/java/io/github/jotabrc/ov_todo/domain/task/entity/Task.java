@@ -5,7 +5,7 @@ import io.github.jotabrc.ov_todo.domain.task.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 import static java.util.Objects.nonNull;
 
@@ -24,7 +24,7 @@ public class Task {
     private String name;
     private Status status;
     @ManyToMany(mappedBy = "tasks")
-    private List<Category> categories;
+    private Set<Category> categories;
 
     @JsonIgnore
     public boolean hasCategories() {
