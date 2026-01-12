@@ -21,10 +21,8 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private Status status;
-
     @ManyToMany(mappedBy = "tasks")
     private List<Category> categories;
 
