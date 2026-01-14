@@ -3,7 +3,6 @@ package io.github.jotabrc.ov_todo.repository;
 import io.github.jotabrc.ov_todo.domain.task.Status;
 import io.github.jotabrc.ov_todo.domain.task.entity.Task;
 import io.github.jotabrc.ov_todo.handler.OvException;
-import io.github.jotabrc.ov_todo.mapper.TaskMapper;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class TaskRepositoryImpl implements TaskRepositoryInterface {
+public class TaskDefaultDefaultRepositoryImpl implements TaskDefaultRepository {
 
     private final TaskRepository taskRepository;
 
@@ -39,6 +38,6 @@ public class TaskRepositoryImpl implements TaskRepositoryInterface {
 
     @Override
     public Page<Task> findAll(Pageable pageable) {
-        return null;
+        return taskRepository.findAll(pageable);
     }
 }

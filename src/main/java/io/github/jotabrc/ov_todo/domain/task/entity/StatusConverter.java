@@ -2,13 +2,9 @@ package io.github.jotabrc.ov_todo.domain.task.entity;
 
 import io.github.jotabrc.ov_todo.domain.task.Status;
 import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
-import org.springframework.stereotype.Component;
 
 import static java.util.Objects.isNull;
 
-@Component
-@Converter(autoApply = true)
 public class StatusConverter implements AttributeConverter<Status, String> {
 
     @Override

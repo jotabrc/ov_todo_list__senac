@@ -4,7 +4,7 @@ import io.github.jotabrc.ov_todo.domain.task.Status;
 import io.github.jotabrc.ov_todo.domain.task.dto.TaskDto;
 import io.github.jotabrc.ov_todo.domain.task.entity.Task;
 import io.github.jotabrc.ov_todo.mapper.TaskMapper;
-import io.github.jotabrc.ov_todo.repository.TaskRepositoryInterface;
+import io.github.jotabrc.ov_todo.repository.TaskDefaultRepository;
 import io.github.jotabrc.ov_todo.service.StrategyCommand;
 import io.github.jotabrc.ov_todo.service.task.executor.TaskExecutor;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class TaskServiceImpl implements TaskService {
 
     private final TaskExecutor taskExecutor;
-    private final TaskRepositoryInterface taskRepository;
+    private final TaskDefaultRepository taskRepository;
     private final TaskMapper taskMapper;
 
     @Override

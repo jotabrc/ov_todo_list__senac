@@ -3,7 +3,7 @@ package io.github.jotabrc.ov_todo.domain.task.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_category")
@@ -18,6 +18,19 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "categories")
-    private List<Task> tasks;
+    @ManyToOne
+    private Task task;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+        return name.equals(category.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) * 31;
+    }
 }

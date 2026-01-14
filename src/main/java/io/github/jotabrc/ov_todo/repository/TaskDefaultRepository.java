@@ -5,7 +5,7 @@ import io.github.jotabrc.ov_todo.domain.task.entity.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface TaskRepositoryInterface {
+public interface TaskDefaultRepository {
 
     Task findByIdOrElseThrow(Long id);
     Task save(Task task);
