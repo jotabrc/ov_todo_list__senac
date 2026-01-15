@@ -7,8 +7,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 
@@ -32,5 +32,23 @@ public class TaskDto {
     @JsonIgnore
     public boolean hasCategories() {
         return nonNull(this.categories) && !this.categories.isEmpty();
+    }
+
+    @JsonIgnore
+    public String getCategoryInput() {
+        return Optional.ofNullable(this.categories)
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(CategoryDto::getName)
+                .collect(Collectors.joining(", "));
+    }
+
+    public void setCategoryInput(String input) {
+        Arrays.stream(Optional.ofNullable(input)
+                .orElse("")
+                .split(","))
+                .map(String::trim)
+                .filter(str -> !str.isBlank())
+                .forEach(name -> this.categories.add(CategoryDto.builder().name(name).build()));
     }
 }

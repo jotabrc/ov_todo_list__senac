@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>ToDo</h1>
+<div class="card">
+    <h2>Nova Tarefa</h2>
+    <form th:action="@{/tasks}" th:object="${newTask}" method="post">
+        <div>
+            <label>Name:</label>
+            <input type="text" th:field="*{name}" placeholder="Name" required/>
+            <label>Name:</label>
+            <input type="text" th:field="*{categoryInput}" placeholder="Category A, Category B"/>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+<hr/>
+
+<div class="lista">
+    <h2>Tarefas Pendentes</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Categories</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.name}"></td>
+            <td th:text="${task.status}"></td>
+            <td>
+            <span th:each="category, iterStat : ${task.categories}"
+                  th:text="${category.name} + (!${iterStat.last} ? ', ' : '')">
+            </span>
+            </td>
+
+            <td>
+                <span th:if="${task.status == 'DONE'}" style="color: green;">Done</span>
+                <span th:unless="${task.status == 'PENDING'}" style="color: red;">Pending</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${#lists.isEmpty(tasks)}">No tasks found</p>
+</div>
+
+</body>
+</html>
