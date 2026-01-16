@@ -25,9 +25,11 @@ public class UpdateStrategy implements BaseStrategy<TaskDto, TaskDto> {
 
     @Override
     public TaskDto execute(TaskDto taskDto) {
-        Task task = taskRepository.findByIdOrElseThrow(taskDto.getId());
-        updateTask(taskDto, task);
-        return taskMapper.toTaskDto(taskRepository.save(task));
+        return taskRepository.findById(taskDto.getId())
+                .map(task -> {
+                    updateTask(taskDto, task);
+                    return taskMapper.toTaskDto(taskRepository.save(task));
+                }).orElse(null);
     }
 
     private void updateTask(TaskDto taskDto, Task task) {

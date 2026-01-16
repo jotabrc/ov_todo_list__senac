@@ -5,6 +5,8 @@ import io.github.jotabrc.ov_todo.domain.task.dto.TaskDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TaskService {
 
     TaskDto save(TaskDto taskDto);
@@ -14,4 +16,5 @@ public interface TaskService {
     TaskDto updateStatus(Long id, Status newStatus);
     Page<TaskDto> findByStatus(Status status, Pageable pageable);
     Page<TaskDto> findAll(Pageable pageable);
+    List<TaskDto> find(Long id, String status, Pageable pageable);
 }

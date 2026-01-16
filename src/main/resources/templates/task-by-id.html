@@ -1,31 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>ToDo</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>ToDo - Task by id</title>
 </head>
 <body>
 
-<h1>ToDo</h1>
-<div class="card">
-    <h2>Nova Tarefa</h2>
-    <form th:action="@{/tasks}" th:object="${newTask}" method="post">
-        <div>
-            <label>Name:</label>
-            <input type="text" th:field="*{name}" placeholder="Name" required/>
-            <label>Name:</label>
-            <input type="text" th:field="*{categoryInput}" placeholder="Category A, Category B"/>
-        </div>
-
-        <button type="submit">Save</button>
-    </form>
-</div>
-
-<hr/>
-
-<div class="lista">
-    <h2>Tarefas Pendentes</h2>
+<div class="list" layout:fragment="main-content">
+    <h2>Task</h2>
     <table>
         <thead>
         <tr>
@@ -54,7 +37,7 @@
         </tbody>
     </table>
 
-    <p th:if="${#lists.isEmpty(tasks)}">No tasks found</p>
+    <p th:if="${#lists.isEmpty(tasks)}">No task found</p>
 </div>
 
 </body>

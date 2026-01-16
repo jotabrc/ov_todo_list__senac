@@ -5,9 +5,11 @@ import io.github.jotabrc.ov_todo.domain.task.entity.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface TaskDefaultRepository {
 
-    Task findByIdOrElseThrow(Long id);
+    Optional<Task> findById(Long id);
     Task save(Task task);
     Boolean delete(Long id);
     Page<Task> findByStatus(Status status, Pageable pageable);

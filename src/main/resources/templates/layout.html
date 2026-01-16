@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$CONTENT_TITLE - ToDo">ToDo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <h1>ToDo</h1>
+    <nav class="header-menu">
+        <a th:href="@{/tasks}" class="button-home">Home</a>
+        <a th:href="@{/tasks/new-task}" class="button-home">New Task</a>
+        <form th:action="@{/tasks/find}" method="get" class="inline">
+            <input type="text" name="id" placeholder="Task ID" class="input-home-find"/>
+            <select name="status" class="select-home-find">
+                <option th:each="opt : ${T(io.github.jotabrc.ov_todo.domain.task.Status).values()}"
+                        th:value="${opt}"
+                        th:text="${opt}">
+                </option>
+            </select>
+            <button type="submit" class="button-home-find">find</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div layout:fragment="main-content">
+        <p>ToDo Application</p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 João Carlos Roveda Ostrovski</p>
+</footer>
+
+</body>
+</html>

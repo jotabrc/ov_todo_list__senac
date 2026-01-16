@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>ToDo - Tasks</title>
+</head>
+<body>
+
+<div class="list" layout:fragment="main-content">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Categories</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.name}"></td>
+            <td th:text="${task.status}"></td>
+            <td>
+            <span th:each="category, iterStat : ${task.categories}"
+                  th:text="${category.name} + (!${iterStat.last} ? ', ' : '')">
+            </span>
+            </td>
+
+            <td>
+                <span th:if="${task.status == 'DONE'}" style="color: green;">Done</span>
+                <span th:unless="${task.status == 'PENDING'}" style="color: red;">Pending</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${#lists.isEmpty(tasks)}">No tasks found</p>
+</div>
+
+</body>
+</html>

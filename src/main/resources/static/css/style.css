@@ -1,4 +1,82 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: Arial, serif;
     font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f9;
+}
+
+input {
+    margin-bottom: 5px;
+}
+
+main {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    flex: 1;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #afafaf;
+    gap: 20px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.button-home {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.input-home-find, .select-home-find {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    margin: 5px 0 5px 5px;
+    font-weight: bold;
+}
+
+.button-home-find {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    margin: 5px 5px 5px 0;
+    font-weight: bold;
+}
+
+.select-home-find {
+    width: 100px
+}
+
+.card-new-task {
+    max-width: 500px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-new-task label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
 }

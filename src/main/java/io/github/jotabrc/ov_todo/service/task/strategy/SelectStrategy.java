@@ -19,7 +19,9 @@ public class SelectStrategy implements BaseStrategy<Long, TaskDto> {
 
     @Override
     public TaskDto execute(Long id) {
-        return taskMapper.toTaskDto(taskRepository.findByIdOrElseThrow(id));
+        return taskRepository.findById(id)
+                .map(taskMapper::toTaskDto)
+                .orElse(null);
     }
 
     @Override
