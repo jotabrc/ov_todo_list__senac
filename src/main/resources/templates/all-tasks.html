@@ -11,11 +11,11 @@
     <table>
         <thead>
         <tr>
-            <th class="list-tasks list-tasks-id">ID</th>
-            <th class="list-tasks">Name</th>
-            <th class="list-tasks">Status</th>
-            <th class="list-tasks">Categories</th>
-            <th class="list-tasks">Actions</th>
+            <th class="list-tasks list-tasks-id list-tasks-title">ID</th>
+            <th class="list-tasks list-tasks-title">Name</th>
+            <th class="list-tasks list-tasks-title">Status</th>
+            <th class="list-tasks list-tasks-title">Categories</th>
+            <th class="list-tasks list-tasks-title">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +25,7 @@
 
             <td class="list-tasks">
                 <span th:text="${task.status}"
-                      th:classappend="${task.status.name() == 'DONE'} ? 'text-status-success' : 'text-status-danger'">
+                      th:classappend="${task.status.name() == 'DONE'} ? 'text-status-done' : 'text-status-pending'">
 
                 </span>
             </td>
@@ -37,7 +37,11 @@
             </td>
 
             <td class="list-tasks">
-                <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="button-action">editar</a>
+                <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="inline button-action">editar</a>
+                <form th:if="*{!task.isDone()}" th:action="@{/tasks/update/{id}/status(id=${task.id})}"
+                      th:method="put">
+                    <button type="submit" class="inline button-clean button-action" th:text="finish"/>
+                </form>
             </td>
         </tr>
         </tbody>

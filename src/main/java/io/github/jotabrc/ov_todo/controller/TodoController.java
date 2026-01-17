@@ -1,5 +1,6 @@
 package io.github.jotabrc.ov_todo.controller;
 
+import io.github.jotabrc.ov_todo.domain.task.Status;
 import io.github.jotabrc.ov_todo.domain.task.dto.TaskDto;
 import io.github.jotabrc.ov_todo.service.task.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -61,5 +62,11 @@ public class TodoController {
     public String update(@ModelAttribute TaskDto task, Model model) {
         Long id = taskService.update(task).getId();
         return "redirect:/tasks?id=%d".formatted(id);
+    }
+
+    @PutMapping(value = "/update/{id}/status")
+    public String updateToDone(@PathVariable("id") Long id) {
+        taskService.updateStatus(id, Status.DONE);
+        return "redirect:/tasks";
     }
 }

@@ -56,8 +56,10 @@ public class TaskServiceImpl implements TaskService {
         Objects.requireNonNull(newStatus, "Status");
         return taskRepository.findById(id)
                 .map(task -> {
-                    if (!Objects.equals(task.getStatus(), newStatus))
+                    if (!Objects.equals(task.getStatus(), newStatus)) {
+                        task.setStatus(newStatus);
                         task = taskRepository.save(task);
+                    }
                     return taskMapper.toTaskDto(task);
                 }).orElse(null);
     }
@@ -76,7 +78,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDto> find(Long id, String status, Pageable pageable) {
         if (isNull(id) && nonNull(status) && !status.isBlank())
-            return this.findByStatus(Status.valueOf(status), pageable).toList();
+            return this.findByStatus(Status.valueOf(status.toUpperCase()), pageable).toList();
         else {
             TaskDto taskDto = this.findById(id);
             return nonNull(taskDto)

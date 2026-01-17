@@ -9,7 +9,7 @@
 
 <div class="card-new-task" layout:fragment="main-content">
     <span>
-    <h2>New Task</h2>
+    <h2>Update Task</h2>
     </span>
     <form th:action="@{/tasks}" th:object="${updateTask}" method="post">
         <div>
@@ -18,7 +18,7 @@
             <label>Categories:</label> <input type="text" th:field="*{categoryInput}"
                                               placeholder="Category A, Category B"/><br/>
             <label>Status:</label>
-            <select name="status" class="select-home-find">
+            <select th:field="*{status}" name="status" class="select-home-find">
                 <option th:each="opt : ${T(io.github.jotabrc.ov_todo.domain.task.Status).values()}"
                         th:value="${opt}"
                         th:text="${opt}">

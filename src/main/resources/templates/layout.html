@@ -13,7 +13,7 @@
     <nav class="header-menu">
         <a th:href="@{/tasks}" class="button-home">Home</a>
         <a th:href="@{/tasks/new-task}" class="button-home">New Task</a>
-        <form th:action="@{/tasks/find}" method="get" class="inline">
+        <form th:action="@{/tasks/find}" method="get" class="inline search-box-default">
             <input type="text" name="id" placeholder="Task ID" class="input-home-find"/>
             <select name="status" class="select-home-find">
                 <option th:each="opt : ${T(io.github.jotabrc.ov_todo.domain.task.Status).values()}"

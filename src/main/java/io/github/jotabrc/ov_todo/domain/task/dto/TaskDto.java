@@ -51,4 +51,8 @@ public class TaskDto {
                 .filter(str -> !str.isBlank())
                 .forEach(name -> this.categories.add(CategoryDto.builder().name(name).build()));
     }
+
+    public boolean isDone() {
+        return this.status.equals(Status.DONE);
+    }
 }

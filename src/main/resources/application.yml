@@ -1,4 +1,5 @@
 spring.application.name: ov-todo
+spring.mvc.hiddenmethod.filter.enabled: true
 
 ---
 spring:
