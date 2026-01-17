@@ -1,32 +1,67 @@
-# Documentação do Projeto: To-Do List
+# OV-TODO Application
 
-## Responsável técnico
-**João Carlos Roveda Ostrovski**
+## Documentation / Documentação
 
-## 1. Introdução
-O projeto **To-Do List** tem como objetivo fornecer uma aplicação simples para gerenciamento de tarefas, permitindo que usuários organizem suas atividades diárias de forma prática e eficiente.
+### English
+**ov-todo** is a Task Management System (ToDo List) built with Java and Spring Boot. It allows users to create, read, update, and delete tasks, organizing them into categories.
+
+#### Features
+*   Task CRUD (Create, Read, Update, Delete).
+*   Task categorization.
+*   Status management (PENDING, DONE).
+*   Web Interface using Thymeleaf.
+*   H2 Database for development/testing.
+
+#### Architecture
+The project follows a layered architecture:
+1.  **Controller:** Handles HTTP requests (`TodoController`).
+2.  **Service:** Business logic, implementing the Strategy pattern for operations (`TaskService`, `TaskExecutor`).
+3.  **Repository:** Data access abstraction (`TaskRepository`).
+4.  **Domain:** Entities and DTOs.
+
+#### How to Run
+1.  Ensure Java 21 is installed.
+2.  Run `mvn spring-boot:run`.
+3.  Access `http://localhost:8080/tasks`.
 
 ---
 
-## 2. Objetivos
-- Facilitar o controle de tarefas pessoais ou profissionais.
-- Permitir a criação, edição, exclusão e visualização de tarefas.
+### Português
+**ov-todo** é um Sistema de Gerenciamento de Tarefas (Lista de Tarefas) construído com Java e Spring Boot. Permite aos usuários criar, ler, atualizar e excluir tarefas, organizando-as em categorias.
 
----
+#### Funcionalidades
+*   CRUD de Tarefas (Criar, Ler, Atualizar, Excluir).
+*   Categorização de tarefas.
+*   Gerenciamento de status (PENDENTE, CONCLUÍDO).
+*   Interface Web usando Thymeleaf.
+*   Banco de dados H2 para desenvolvimento/testes.
 
-## 3. Requisitos Funcionais
-- **RF01**: Sistema deve permitir o cadastro de tarefas.
-- **RF02**: Sistema deve permitir a edição de tarefas.
-- **RF03**: Sistema deve permitir exclusão de tarefas.
-- **RF04**: Sistema deve permitir marcar tarefas como concluídas.
-- **RF05**: Sistema deve permitir visualizar tarefas cadastradas.
-- **RF06**: Sistema deve permitir visualizar tarefas por status (pendente ou concluída).
-- **RF07**: Sistema deve permitir categorizar tarefas.
+#### Arquitetura
+O projeto segue uma arquitetura em camadas:
+1.  **Controller:** Lida com requisições HTTP (`TodoController`).
+2.  **Service:** Lógica de negócios, implementando o padrão Strategy para operações (`TaskService`, `TaskExecutor`).
+3.  **Repository:** Abstração de acesso a dados (`TaskRepository`).
+4.  **Domain:** Entidades e DTOs.
 
----
+#### Como Executar
+1.  Certifique-se de que o Java 21 está instalado.
+2.  Execute `mvn spring-boot:run`.
+3.  Acesse `http://localhost:8080/tasks`.
 
-## 4. Requisitos Não Funcionais
-- **RNF01**: Sistema deve ser responsivo e ter interface amigável.
-- **RNF02**: Sistema deve armazenar dados em um banco relacional (PostgreSQL).
-- **RNF04**: O sistema deve ser desenvolvido em Java.
-- **RNF05**: Sistema deve ter arquitetura em camadas (controlador, serviço, repositório e componentes).
+## Project Structure / Estrutura do Projeto
+
+```mermaid
+graph TD
+    A[TodoController] --> B[TaskService]
+    B --> C[TaskExecutor]
+    C --> D{Strategy}
+    D -->|Insert| E[InsertStrategy]
+    D -->|Update| F[UpdateStrategy]
+    D -->|Select| G[SelectStrategy]
+    D -->|Delete| H[DeleteStrategy]
+    E --> I[TaskRepository]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[(Database)]
+```

@@ -80,3 +80,23 @@ main {
     margin-right: 10px;
     font-weight: bold;
 }
+
+.list table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.list-tasks {
+    width: 23%;
+    display: inline-block;
+    text-align: center;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-tasks-id {
+    width: 5%;
+}

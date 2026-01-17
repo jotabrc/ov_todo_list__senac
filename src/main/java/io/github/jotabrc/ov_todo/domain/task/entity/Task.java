@@ -5,8 +5,10 @@ import io.github.jotabrc.ov_todo.domain.task.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Entity
@@ -31,4 +33,21 @@ public class Task {
     public boolean hasCategories() {
         return nonNull(this.categories) && !this.categories.isEmpty();
     }
+
+    @JsonIgnore
+    public void updateCategories(Set<Category> newCategories) {
+        if (isNull(this.getCategories())) this.categories = new HashSet<>();
+        if (isNull(newCategories) || newCategories.isEmpty()) {
+            this.categories.clear();
+            return;
+        }
+
+        this.categories.removeIf(category -> newCategories.stream()
+                .noneMatch(newCategory -> category.getName()
+                        .equalsIgnoreCase(newCategory.getName())));
+
+        this.categories.addAll(newCategories);
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package io.github.jotabrc.ov_todo.service.task.strategy;
 
 import io.github.jotabrc.ov_todo.domain.task.dto.TaskDto;
+import io.github.jotabrc.ov_todo.domain.task.entity.Category;
 import io.github.jotabrc.ov_todo.domain.task.entity.Task;
 import io.github.jotabrc.ov_todo.mapper.TaskMapper;
 import io.github.jotabrc.ov_todo.repository.TaskDefaultRepository;
@@ -11,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.cfg.MapperBuilder;
 
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,14 +39,15 @@ public class UpdateStrategy implements BaseStrategy<TaskDto, TaskDto> {
     private void updateTask(TaskDto taskDto, Task task) {
         task.setName(taskDto.getName());
         task.setStatus(taskDto.getStatus());
-        task.getCategories()
-                .removeIf(category -> !taskDto.getCategories().isEmpty() && taskDto.getCategories()
-                        .stream()
-                        .anyMatch(categoryDto -> !Objects.equals(categoryDto.getName(), category.getName())));
-        task.setCategories(taskDto.getCategories()
+
+        Set<Category> newCategories = Optional.ofNullable(taskDto.getCategories())
+                .orElse(Collections.emptyList())
                 .stream()
+                .filter(category -> Objects.nonNull(category.getName()) && !category.getName().isBlank())
                 .map(taskMapper::toCategory)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet());
+
+        task.updateCategories(newCategories);
     }
 
     @Override

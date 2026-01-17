@@ -11,26 +11,33 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Categories</th>
+            <th class="list-tasks list-tasks-id">ID</th>
+            <th class="list-tasks">Name</th>
+            <th class="list-tasks">Status</th>
+            <th class="list-tasks">Categories</th>
+            <th class="list-tasks">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="task : ${tasks}">
-            <td th:text="${task.id}"></td>
-            <td th:text="${task.name}"></td>
-            <td th:text="${task.status}"></td>
-            <td>
+            <td th:text="${task.id}" class="list-tasks list-tasks-id"></td>
+            <td th:text="${task.name}" class="list-tasks"></td>
+
+            <td class="list-tasks">
+                <span th:text="${task.status}"
+                      th:classappend="${task.status.name() == 'DONE'} ? 'text-status-success' : 'text-status-danger'">
+
+                </span>
+            </td>
+
+            <td class="list-tasks">
             <span th:each="category, iterStat : ${task.categories}"
                   th:text="${category.name} + (!${iterStat.last} ? ', ' : '')">
             </span>
             </td>
 
-            <td>
-                <span th:if="${task.status == 'DONE'}" style="color: green;">Done</span>
-                <span th:unless="${task.status == 'PENDING'}" style="color: red;">Pending</span>
+            <td class="list-tasks">
+                <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="button-action">editar</a>
             </td>
         </tr>
         </tbody>

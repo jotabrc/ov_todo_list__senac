@@ -49,4 +49,17 @@ public class TodoController {
         Long id = taskService.save(task).getId();
         return "redirect:/tasks?id=%d".formatted(id);
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        TaskDto task = taskService.findById(id);
+        model.addAttribute("updateTask", task);
+        return "edit-task";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute TaskDto task, Model model) {
+        Long id = taskService.update(task).getId();
+        return "redirect:/tasks?id=%d".formatted(id);
+    }
 }
