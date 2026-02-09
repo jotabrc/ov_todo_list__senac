@@ -10,7 +10,6 @@ import io.github.jotabrc.ov_todo.service.StrategyCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import tools.jackson.databind.cfg.MapperBuilder;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -25,7 +24,6 @@ public class UpdateStrategy implements BaseStrategy<TaskDto, TaskDto> {
 
     private final TaskMapper taskMapper;
     private final TaskDefaultRepository taskRepository;
-    private final MapperBuilder mapperBuilder;
 
     @Override
     public TaskDto execute(TaskDto taskDto) {
